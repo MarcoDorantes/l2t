@@ -30,7 +30,7 @@ namespace IllyumL2T.Core.Parse
       //
       parseMethod = FieldParserResolver.For(FieldType);
 
-      parsingErrors = new List<string>();
+      parsingErrors = [];
     }
 
     #region IFieldParser implementation
@@ -56,7 +56,7 @@ namespace IllyumL2T.Core.Parse
       }
 
       //
-      // First off, we make a copy of the input we are about to parse...
+      // First off, we keep a reference to the input we are about to parse...
       //
       FieldInput = input;
 

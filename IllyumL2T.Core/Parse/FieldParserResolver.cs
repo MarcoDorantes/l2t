@@ -49,15 +49,11 @@ namespace IllyumL2T.Core.Parse
         return null;
       }
       
-      var result = default(bool);
-      if(bool.TryParse(input, out result))
+      if(bool.TryParse(input, out bool result))
       {
         return result;
       }
-      else
-      {
-        return null;
-      }
+      return null;
     }
 
     private static object ParseDateTime(IFieldParser fieldParser)
@@ -72,8 +68,7 @@ namespace IllyumL2T.Core.Parse
       var cultureInfo = new CultureInfo(fieldParser.ParseBehavior.CultureName);
       var dateTimeStyle = fieldParser.ParseBehavior.DateTimeStyle;
 
-      var result = default(DateTime);
-      if(DateTime.TryParseExact(input, format, cultureInfo, dateTimeStyle, out result))
+      if(DateTime.TryParseExact(input, format, cultureInfo, dateTimeStyle, out DateTime result))
       {
         return result;
       }
@@ -93,8 +88,7 @@ namespace IllyumL2T.Core.Parse
       var cultureInfo = new CultureInfo(fieldParser.ParseBehavior.CultureName);
       var dateTimeStyle = fieldParser.ParseBehavior.DateTimeStyle;
 
-      var result = default(DateTimeOffset);
-      if(DateTimeOffset.TryParseExact(input, format, cultureInfo, dateTimeStyle, out result))
+      if(DateTimeOffset.TryParseExact(input, format, cultureInfo, dateTimeStyle, out DateTimeOffset result))
       {
         return result;
       }
@@ -175,15 +169,11 @@ namespace IllyumL2T.Core.Parse
         cultureInfo = new CultureInfo(cultureName);
       }
 
-      var result = default(T);
-      if(parse(input, numberStyle, cultureInfo, out result))
+      if(parse(input, numberStyle, cultureInfo, out T result))
       {
         return result;
       }
-      else
-      {
-        return null;
-      }
+      return null;
     }
 
     #endregion
