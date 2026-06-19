@@ -744,6 +744,23 @@ namespace IllyumL2T.Core.FieldsSplit.UnitTests
     }
 
     [TestMethod]
+    public void ParseNullableDoubleValueTest()
+    {
+      // Arrange
+      var propertyName = "NullableDoubleProperty";
+      var propertyInfo = typeof(Foo).GetProperties().Single(p => p.Name == propertyName);
+
+      // Act
+      var fieldParser = new FieldParser(propertyInfo);
+      var actual = fieldParser.Parse("3.1416");
+
+      // Assert
+      Assert.IsNotNull(actual);
+      Assert.AreEqual(3.1416d, (double)actual);
+      Assert.IsFalse(fieldParser.Errors.Any());
+    }
+
+    [TestMethod]
     public void ParseBooleanUnparsableTest()
     {
       // Arrange

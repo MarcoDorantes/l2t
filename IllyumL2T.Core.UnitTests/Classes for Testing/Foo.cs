@@ -38,6 +38,7 @@ namespace IllyumL2T.Core.FieldsSplit.UnitTests
     [ParseBehavior(NumberStyle = NumberStyles.AllowDecimalPoint)]
     public double DoubleProperty { get; set; }
 
+    [ParseBehavior(NumberStyle = NumberStyles.Number)]
     public double? NullableDoubleProperty { get; set; }
 
     [ParseBehavior(NumberStyle = NumberStyles.AllowDecimalPoint)]

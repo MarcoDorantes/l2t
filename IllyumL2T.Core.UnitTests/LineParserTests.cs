@@ -423,5 +423,49 @@ namespace IllyumL2T.Core.FieldsSplit.UnitTests
 
       Assert.AreEqual<Foo>(expected, actual);
     }
+
+    [TestMethod]
+    public void LineParseUsingNullableValidDoubleValueTest()
+    {
+      // Arrange
+      var line = "Jane Doe|jane@domain.com|F||128||1234||98765||1234567890||1.2||3.4|3.1416|3.1416||25/12/2007||123|";
+
+      // Act
+      var fieldsSplitter = new DelimiterSeparatedValuesFieldsSplitter<Foo>(delimiter: '|');
+      var lineParser = new LineParser<Foo>(fieldsSplitter);
+      var parseResult = lineParser.Parse(line);
+
+      // Assert
+      Assert.IsNull(parseResult.Errors);
+
+      var actual = parseResult.Instance;
+      var expected = new Foo()
+      {
+        StringProperty = "Jane Doe",
+        StringPropertyWithPattern = "jane@domain.com",
+        CharProperty = 'F',
+        NullableCharProperty = null,
+        ByteProperty = 128,
+        NullableByteProperty = null,
+        Int16Property = 1234,
+        NullableInt16Property = null,
+        Int32Property = 98765,
+        NullableInt32Property = null,
+        Int64Property = 1234567890L,
+        NullableInt64Property = null,
+        SingleProperty = 1.2F,
+        NullableSingleProperty = null,
+        DoubleProperty = 3.4,
+        NullableDoubleProperty = 3.1416d,
+        DecimalProperty = 3.1416m,
+        NullableDecimalProperty = null,
+        DateTimeProperty = new DateTime(2007, 12, 25),
+        NullableDateTimeProperty = null,
+        UInt64Property = 123UL,
+        NullableUInt64Property = null
+      };
+
+      Assert.AreEqual<Foo>(expected, actual);
+    }
   }
 }
