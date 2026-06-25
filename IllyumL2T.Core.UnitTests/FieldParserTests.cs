@@ -485,6 +485,28 @@ namespace IllyumL2T.Core.FieldsSplit.UnitTests
     }
 
     [TestMethod]
+    public void ParseInt32_UnparsableCommaTest()
+    {
+      // Arrange
+      var propertyName = "Int32Property";
+      var propertyInfo = typeof(Foo).GetProperties().Single(p => p.Name == propertyName);
+
+      // Act
+      var fieldParser = new FieldParser(propertyInfo);
+      fieldParser.Parse("123,456");
+      var actual = fieldParser.FieldValue;
+      var expectedErrorCount = 1;
+      var actualErrorCount = fieldParser.Errors.Count();
+      var expectedErrorMessage = $"{fieldParser.FieldName}: Unparsable {fieldParser.FieldType} >>> {fieldParser.FieldInput}";
+      var actualErrorMessage = fieldParser.Errors.Single();
+
+      // Assert
+      Assert.IsNull(actual);
+      Assert.AreEqual<int>(expectedErrorCount, actualErrorCount);
+      Assert.AreEqual<string>(expectedErrorMessage, actualErrorMessage);
+    }
+
+    [TestMethod]
     public void ParseNullableInt32Test()
     {
       // Arrange
